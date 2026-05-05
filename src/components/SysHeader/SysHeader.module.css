@@ -1,0 +1,44 @@
+/* Barra superior */
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px 28px;
+  border-bottom: 1px solid var(--fg4);
+  background: rgba(8, 8, 8, 0.98);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* Colunas */
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.right {
+  align-items: flex-end;
+}
+
+/* Linha de info */
+.row {
+  display: flex;
+  gap: 10px;
+  font-size: 10px;
+}
+
+/* Labels e valores */
+.key {
+  color: var(--fg2);
+  min-width: 86px;
+  letter-spacing: 1px;
+}
+
+.val {
+  color: var(--fg);
+  letter-spacing: 0.5px;
+}
+
+.red   { color: var(--red); }
+.green { color: var(--green); }

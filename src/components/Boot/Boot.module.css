@@ -1,0 +1,104 @@
+/* Container do boot — fullscreen */
+.boot {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 300;
+  padding: 28px 40px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+}
+
+/* Área das linhas */
+.lines {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Linha individual */
+.line {
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+/* Tag colorida por tipo */
+.tag {
+  font-weight: 700;
+  min-width: 72px;
+  display: inline-block;
+  letter-spacing: 0.5px;
+}
+
+.ok   .tag { color: var(--green); }
+.info .tag { color: #6b9fff; }
+.warn .tag { color: #f0a500; }
+
+.text { color: var(--fg2); }
+
+/* Barra de progresso */
+.progress {
+  margin-top: 14px;
+}
+
+.progressLabel {
+  font-size: 10px;
+  color: var(--fg2);
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.progressBar {
+  height: 2px;
+  background: var(--fg4);
+  position: relative;
+}
+
+.progressFill {
+  height: 2px;
+  background: var(--red);
+  transition: width 0.06s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Mensagem de boot completo */
+.done {
+  margin-top: 16px;
+  padding: 14px 18px;
+  border: 1px solid var(--redborder);
+  background: var(--redbg);
+}
+
+.doneTitle {
+  font-size: 12px;
+  color: var(--fg);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.doneSub {
+  font-size: 10px;
+  color: var(--fg2);
+  letter-spacing: 1px;
+}
+
+/* Prompt para continuar */
+.enter {
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--red);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}

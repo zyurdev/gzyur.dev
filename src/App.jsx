@@ -1,10 +1,20 @@
-// Componente raiz — por enquanto só valida que o setup está funcionando
+// Componente raiz — controla se o boot já terminou
+import { useState } from 'react'
+import Boot from './components/Boot/Boot'
+import SysHeader from './components/SysHeader/SysHeader'
+
 function App() {
+  const [booted, setBooted] = useState(false)
+
   return (
-    <div>
-      <p style={{ padding: '20px', color: 'var(--red)' }}>
-        zyur@3d:~$ <span style={{ color: 'var(--fg)' }}>sistema iniciando...</span>
-      </p>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+
+      {/* Boot aparece até o usuário pressionar qualquer tecla */}
+      {!booted && <Boot onComplete={() => setBooted(true)} />}
+
+      {/* Site principal — só renderiza após o boot */}
+      {booted && <SysHeader />}
+
     </div>
   )
 }
