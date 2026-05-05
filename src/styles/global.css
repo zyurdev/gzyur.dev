@@ -29,7 +29,7 @@
   padding: 0;
 }
 
-/* Base do documento — fullscreen, sem scroll externo */
+/* Base do documento */
 html, body {
   height: 100%;
   overflow: hidden;
@@ -44,7 +44,7 @@ body {
   cursor: default;
 }
 
-/* Root do React ocupa altura total */
+/* Root do React */
 #root {
   height: 100%;
   display: flex;
