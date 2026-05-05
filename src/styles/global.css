@@ -1,0 +1,52 @@
+/* Fonte */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Variáveis de cor e fonte */
+:root {
+  --bg:        #080808;
+  --bg1:       #111111;
+  --bg2:       #161616;
+
+  --red:       #e8231a;
+  --red2:      #ff3328;
+  --redbg:     rgba(232, 35, 26, 0.10);
+  --redborder: rgba(232, 35, 26, 0.35);
+
+  --green: #3ddc84;
+
+  --fg:  #d4d0c8;
+  --fg2: #a09a90;
+  --fg3: #6a6560;
+  --fg4: #333028;
+
+  --mono: 'Space Mono', monospace;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Base do documento — fullscreen, sem scroll externo */
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+body {
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.5;
+  cursor: default;
+}
+
+/* Root do React ocupa altura total */
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
