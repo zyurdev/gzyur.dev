@@ -4,10 +4,12 @@ import TerminalOutput from './TerminalOutput'
 import TerminalInput from './TerminalInput'
 import styles from './Terminal.module.css'
 
-function Terminal({ onNavigate, onShutdown }) {
+function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
   const { lines, processCommand, navigateHistory } = useTerminal({
+    t,
     onNavigate,
     onShutdown,
+    onLangChange,
   })
 
   return (

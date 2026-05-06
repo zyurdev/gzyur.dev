@@ -1,30 +1,27 @@
 // Barra superior fixa — informações do sistema
-import { useUptime } from '../../hooks/useUptime'
 import styles from './SysHeader.module.css'
+import { useUptime } from '../../hooks/useUptime'
 
-function SysHeader() {
+function SysHeader({ t }) {
   const uptime = useUptime()
 
   return (
     <header className={styles.header}>
-
-      {/* Coluna esquerda — identidade do sistema */}
       <div className={styles.col}>
         <div className={styles.row}>
           <span className={styles.key}>SYS.NAME</span>
-          <span className={`${styles.val} ${styles.red}`}>3D_OS v1.0.0</span>
+          <span className={`${styles.val} ${styles.red}`}>{t.sysName}</span>
         </div>
         <div className={styles.row}>
           <span className={styles.key}>SYS.AUTH</span>
-          <span className={`${styles.val} ${styles.green}`}>GUEST_ACCESS_GRANTED</span>
+          <span className={`${styles.val} ${styles.green}`}>{t.sysAuth}</span>
         </div>
         <div className={styles.row}>
           <span className={styles.key}>SYS.NODE</span>
-          <span className={styles.val}>gzyur.dev</span>
+          <span className={styles.val}>{t.sysNode}</span>
         </div>
       </div>
 
-      {/* Coluna direita — status do sistema */}
       <div className={`${styles.col} ${styles.right}`}>
         <div className={styles.row}>
           <span className={styles.key}>UPTIME</span>
@@ -32,14 +29,13 @@ function SysHeader() {
         </div>
         <div className={styles.row}>
           <span className={styles.key}>TERMINAL</span>
-          <span className={styles.val}>TTY0</span>
+          <span className={styles.val}>{t.terminal}</span>
         </div>
         <div className={styles.row}>
           <span className={styles.key}>STATUS</span>
-          <span className={`${styles.val} ${styles.red}`}>200 OK</span>
+          <span className={`${styles.val} ${styles.red}`}>{t.status}</span>
         </div>
       </div>
-
     </header>
   )
 }
