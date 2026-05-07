@@ -12,7 +12,8 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: calc(min(700px, 92vh) / -2);
+  margin-left: calc(min(960px, 94vw) / -2);
   width: min(960px, 94vw);
   height: min(700px, 92vh);
   background: var(--bg1);
