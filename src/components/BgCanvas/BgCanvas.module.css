@@ -1,0 +1,8 @@
+/* Canvas fixo atrás de tudo — z-index acima do app para aparecer como overlay leve */
+.canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.18;
+}

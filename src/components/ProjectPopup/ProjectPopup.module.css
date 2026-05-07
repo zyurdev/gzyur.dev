@@ -1,0 +1,312 @@
+/* Overlay escuro atrás do popup */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 8, 0.75);
+  backdrop-filter: blur(3px);
+  z-index: 400;
+}
+
+/* Janela do popup */
+.window {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(960px, 94vw);
+  height: min(700px, 92vh);
+  background: var(--bg1);
+  border: 1px solid var(--fg4);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.8);
+  z-index: 500;
+}
+
+/* Barra de título */
+.titleBar {
+  display: flex;
+  align-items: center;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--fg4);
+  flex-shrink: 0;
+  height: 36px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border-right: 1px solid var(--fg4);
+}
+
+.tabs::-webkit-scrollbar { height: 0; }
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  height: 36px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--fg3);
+  border-right: 1px solid var(--fg4);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.tabActive {
+  background: var(--bg1);
+  color: var(--fg);
+  border-bottom: 1px solid var(--bg1);
+  margin-bottom: -1px;
+}
+
+.tab:hover:not(.tabActive) {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--fg2);
+}
+
+.tabDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+.tabName { flex: 1; }
+
+.tabClose {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--fg4);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.12s;
+  font-family: var(--mono);
+  line-height: 1;
+  padding: 0;
+}
+
+.tabClose:hover {
+  background: rgba(232, 35, 26, 0.25);
+  color: var(--red);
+}
+
+/* Botão fechar o popup */
+.closeBtn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--fg3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: var(--mono);
+  flex-shrink: 0;
+}
+
+.closeBtn:hover {
+  background: rgba(232, 35, 26, 0.2);
+  color: var(--red);
+}
+
+/* Corpo */
+.body {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Área de output com scroll */
+.output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px;
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+.output::-webkit-scrollbar { width: 2px; }
+.output::-webkit-scrollbar-thumb { background: var(--fg4); }
+
+/* Linha de comando */
+.cmdLine {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  margin-bottom: 6px;
+  margin-top: 4px;
+}
+
+.prompt { color: var(--red); font-weight: 700; }
+.cmd    { color: var(--fg2); }
+
+/* Header do projeto */
+.projectHeader {
+  margin-bottom: 14px;
+}
+
+.projectTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.projectTags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 8px;
+  color: var(--fg2);
+  border: 1px solid var(--fg4);
+  padding: 2px 6px;
+  letter-spacing: 0.5px;
+}
+
+.year {
+  font-size: 9px;
+  color: var(--fg3);
+  margin-left: 4px;
+}
+
+/* Imagem placeholder */
+.imgPlaceholder {
+  background: var(--bg2);
+  border: 1px solid var(--fg4);
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0 16px;
+}
+
+.imgPlaceholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.08) 3px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+}
+
+.imgCorner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: rgba(232, 35, 26, 0.4);
+  border-style: solid;
+}
+
+.imgTl { top: 8px;    left: 8px;  border-width: 1.5px 0 0 1.5px; }
+.imgTr { top: 8px;    right: 8px; border-width: 1.5px 1.5px 0 0; }
+.imgBl { bottom: 8px; left: 8px;  border-width: 0 0 1.5px 1.5px; }
+.imgBr { bottom: 8px; right: 8px; border-width: 0 1.5px 1.5px 0; }
+
+.imgLabel {
+  font-size: 9px;
+  color: var(--fg3);
+  letter-spacing: 2px;
+  z-index: 2;
+  text-transform: uppercase;
+}
+
+.imgSub {
+  font-size: 8px;
+  color: var(--fg4);
+  letter-spacing: 1px;
+  z-index: 2;
+  margin-top: 4px;
+}
+
+/* Bloco de texto */
+.block {
+  padding: 4px 0 10px 14px;
+  color: var(--fg2);
+  border-left: 1px solid var(--fg4);
+  margin: 2px 0 10px 4px;
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+/* Key/value */
+.kvRow {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.kvKey { color: var(--fg3); }
+.kvVal { color: var(--fg2); }
+
+/* Separator */
+.separator {
+  height: 1px;
+  background: var(--fg4);
+  margin: 10px 0;
+}
+
+/* Link para contato */
+.contactHint {
+  font-size: 9px;
+  color: var(--fg3);
+  letter-spacing: 0.5px;
+}
+
+.contactLink {
+  color: var(--red);
+  cursor: pointer;
+  transition: opacity 0.12s;
+}
+
+.contactLink:hover { opacity: 0.7; }
+
+/* Status bar */
+.statusBar {
+  padding: 5px 16px;
+  border-top: 1px solid var(--fg4);
+  background: var(--bg2);
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: var(--fg3);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.statusRight { color: var(--red); }

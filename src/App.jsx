@@ -1,15 +1,18 @@
-// Componente raiz — controla boot, idioma, navegação e layout
+// Componente raiz — controla boot, idioma, navegação e popup
 import { useState } from 'react'
-import Boot       from './components/Boot/Boot'
-import SysHeader  from './components/SysHeader/SysHeader'
-import Terminal   from './components/Terminal/Terminal'
-import RightPanel from './components/RightPanel/RightPanel'
-import { useLang } from './hooks/useLang'
+import Boot         from './components/Boot/Boot'
+import SysHeader    from './components/SysHeader/SysHeader'
+import Terminal     from './components/Terminal/Terminal'
+import RightPanel   from './components/RightPanel/RightPanel'
+import ProjectPopup from './components/ProjectPopup/ProjectPopup'
+import BgCanvas     from './components/BgCanvas/BgCanvas'
+import { useLang }  from './hooks/useLang'
 
 function App() {
-  const [booted, setBooted]   = useState(false)
-  const [page, setPage]       = useState(null)
-  const { t, changeLang }     = useLang()
+  const [booted, setBooted]           = useState(false)
+  const [page, setPage]               = useState(null)
+  const [openProject, setOpenProject] = useState(null)
+  const { t, changeLang }             = useLang()
 
   function handleShutdown() {
     window.location.reload()
@@ -18,13 +21,15 @@ function App() {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
 
+      {/* Background animado — aparece em cima de tudo como overlay leve */}
+      <BgCanvas />
+
       {!booted && <Boot onComplete={() => setBooted(true)} t={t} />}
 
       {booted && (
         <>
           <SysHeader t={t} />
 
-          {/* Área principal — terminal + painel direito lado a lado */}
           <div style={{ display: 'flex', flex: 1, overflow: 'hidden', minHeight: 0 }}>
             <Terminal
               t={t}
@@ -36,9 +41,14 @@ function App() {
               page={page}
               t={t}
               onClose={() => setPage(null)}
-              onOpenProject={(i) => console.log('abrir projeto', i)}
+              onOpenProject={setOpenProject}
             />
           </div>
+
+          <ProjectPopup
+            projectIndex={openProject}
+            onClose={() => setOpenProject(null)}
+          />
         </>
       )}
 
