@@ -5,7 +5,6 @@ import styles from './Terminal.module.css'
 function TerminalOutput({ lines }) {
   const bottomRef = useRef(null)
 
-  // Scroll automático para o final ao adicionar linhas
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [lines])
@@ -14,16 +13,11 @@ function TerminalOutput({ lines }) {
     <div className={styles.output}>
       {lines.map((line, i) => (
         <div key={i} className={styles.entry}>
-
-          {/* Linha do comando digitado */}
           <div className={styles.cmdLine}>
             <span className={styles.prompt}>$&nbsp;</span>
             <span className={styles.cmd}>{line.cmd}</span>
           </div>
-
-          {/* Output do comando */}
           {line.result && <OutputResult result={line.result} />}
-
         </div>
       ))}
       <div ref={bottomRef} />
@@ -31,12 +25,10 @@ function TerminalOutput({ lines }) {
   )
 }
 
-// Renderiza o resultado dependendo do tipo
 function OutputResult({ result }) {
   const s = styles
 
   if (result.type === 'output') {
-    // Lista de arquivos (ls)
     if (result.isList) {
       return (
         <div className={s.block}>
@@ -49,8 +41,7 @@ function OutputResult({ result }) {
         </div>
       )
     }
-    // Texto simples
-    return <div className={s.block}>{result.content}</div>
+    return <div className={s.block} style={{ whiteSpace: 'pre-line' }}>{result.content}</div>
   }
 
   if (result.type === 'status') {
@@ -76,7 +67,7 @@ function OutputResult({ result }) {
             <span className={s.helpDesc}>— {item.desc}</span>
           </div>
         ))}
-        <div className={s.helpGroup} style={{ marginTop: '8px' }}>— páginas —</div>
+        <div className={s.helpGroup} style={{ marginTop: '8px' }}>— pages —</div>
         {result.content.pages.map((item, i) => (
           <div key={i} className={s.helpRow}>
             <span className={s.helpCmd}>{item.cmd}</span>
@@ -87,6 +78,10 @@ function OutputResult({ result }) {
     )
   }
 
+  if (result.type === 'lang') {
+    return <div className={`${s.block} ${s.lang}`}>{result.content}</div>
+  }
+
   if (result.type === 'error') {
     return <div className={`${s.block} ${s.error}`}>{result.content}</div>
   }
@@ -94,9 +89,9 @@ function OutputResult({ result }) {
   if (result.type === 'shutdown') {
     return (
       <div className={s.block}>
-        <div className={s.error}>Iniciando sequência de shutdown...</div>
-        <div>Salvando estado do sistema...</div>
-        <div>Desmontando módulos 3D...</div>
+        {result.content.map((line, i) => (
+          <div key={i} className={i === 0 ? s.error : ''}>{line}</div>
+        ))}
       </div>
     )
   }

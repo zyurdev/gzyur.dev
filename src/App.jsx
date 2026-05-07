@@ -6,6 +6,7 @@ import Terminal     from './components/Terminal/Terminal'
 import RightPanel   from './components/RightPanel/RightPanel'
 import ProjectPopup from './components/ProjectPopup/ProjectPopup'
 import BgCanvas     from './components/BgCanvas/BgCanvas'
+import NavBar       from './components/NavBar/NavBar'
 import { useLang }  from './hooks/useLang'
 
 function App() {
@@ -21,7 +22,6 @@ function App() {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
 
-      {/* Background animado — aparece em cima de tudo como overlay leve */}
       <BgCanvas />
 
       {!booted && <Boot onComplete={() => setBooted(true)} t={t} />}
@@ -44,6 +44,12 @@ function App() {
               onOpenProject={setOpenProject}
             />
           </div>
+
+          <NavBar
+            t={t}
+            page={page}
+            onNavigate={setPage}
+          />
 
           <ProjectPopup
             projectIndex={openProject}

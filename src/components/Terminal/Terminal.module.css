@@ -8,6 +8,97 @@
   background: rgba(8, 8, 8, 0.97);
 }
 
+/* Barra de título */
+.titleBar {
+  padding: 7px 28px;
+  border-bottom: 1px solid var(--fg4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  background: rgba(8, 8, 8, 0.96);
+}
+
+.titleText {
+  font-size: 9px;
+  color: var(--fg2);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.titleRight {
+  font-size: 9px;
+  color: var(--red);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Ponto piscando REC */
+.recDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: recBlink 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes recBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.1; }
+}
+
+/* Hint bar */
+.hintBar {
+  padding: 5px 28px;
+  border-bottom: 1px solid var(--fg4);
+  flex-shrink: 0;
+  background: rgba(8, 8, 8, 0.92);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.hintGroup {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.hintSep {
+  width: 1px;
+  height: 14px;
+  background: var(--fg4);
+  margin: 0 10px;
+}
+
+.hintLabel {
+  font-size: 9px;
+  color: var(--fg3);
+  letter-spacing: 1px;
+  margin-right: 6px;
+  white-space: nowrap;
+}
+
+.hintCmd {
+  font-size: 9px;
+  color: var(--fg2);
+  cursor: pointer;
+  padding: 1px 6px;
+  border: 1px solid transparent;
+  transition: all 0.1s;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.hintCmd:hover {
+  color: var(--red);
+  border-color: var(--fg4);
+}
+
 /* Área de output com scroll */
 .output {
   flex: 1;
@@ -87,8 +178,9 @@
 .helpCmd  { color: var(--fg);  min-width: 120px; }
 .helpDesc { color: var(--fg2); }
 
-/* erro */
+/* erro e lang */
 .error { color: var(--red); }
+.lang  { color: var(--green); }
 
 /* Linha de input */
 .inputLine {
