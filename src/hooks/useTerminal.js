@@ -26,8 +26,8 @@ export function useTerminal({ t, onNavigate, onShutdown, onLangChange }) {
 
     // Idioma
     if (lower === 'lang pt') { onLangChange('pt'); pushLine(input, { type: 'lang', content: 'Idioma alterado para Português.' }); return }
-    if (lower === 'lang en') { onLangChange('en'); pushLine(input, { type: 'lang', content: 'Language switched to English.' });   return }
-    if (lower === 'lang es') { onLangChange('es'); pushLine(input, { type: 'lang', content: 'Idioma cambiado a Español.' });      return }
+    if (lower === 'lang en') { onLangChange('en'); pushLine(input, { type: 'lang', content: 'Language switched to English.'   }); return }
+    if (lower === 'lang es') { onLangChange('es'); pushLine(input, { type: 'lang', content: 'Idioma cambiado a Español.'      }); return }
 
     // Shutdown
     if (lower === 'shutdown sys') {

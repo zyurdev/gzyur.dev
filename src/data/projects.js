@@ -1,4 +1,4 @@
-// Dados dos projetos
+// Projetos reais do Gabriel
 const projects = [
   {
     id: 'fivem-cidade',

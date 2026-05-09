@@ -38,15 +38,15 @@ const translations = {
     ],
 
     // Terminal — whoami
-    whoami: `3D Artist — props, environments and MLOs for games and FiveM.\n5+ years turning briefs into assets that work in real pipelines.`,
+    whoami: `3D Artist — props, environments and MLOs for games and FiveM.\n5+ years turning briefs into production-ready assets.`,
 
     // Terminal — sys status
     sysStatus: [
       { key: 'IDENTITY', value: 'ZYUR — 3D Artist' },
       { key: 'LOCATION', value: 'São Paulo, Brazil — remote' },
       { key: 'FOCUS',    value: 'Props · FiveM MLO · Environments' },
-      { key: 'TOOLS',    value: 'Blender · Substance Painter · UE5' },
-      { key: 'CONTACT',  value: 'artstation.com/zyur', highlight: true },
+      { key: 'TOOLS',    value: 'Blender · Substance Painter · CodeWalker · UE5' },
+      { key: 'ARTSTATION', value: 'artstation.com/zyur', highlight: true },
       { key: 'STATUS',   value: 'OPEN_TO_WORK', highlight: true },
       { key: 'RESPONSE', value: 'within 24h' },
     ],
@@ -133,16 +133,16 @@ const translations = {
       'Sistema online...',
     ],
 
-    whoami: `Modelador 3D — props, cenários e MLOs para games e FiveM.\n5+ anos transformando briefs em assets que funcionam no pipeline real.`,
+    whoami: `Modelador 3D — props, cenários e MLOs para games e FiveM.\n5+ anos entregando assets prontos para produção.`,
 
     sysStatus: [
-      { key: 'IDENTIDADE', value: 'ZYUR — Modelador 3D' },
+      { key: 'IDENTIDADE',  value: 'ZYUR — Modelador 3D' },
       { key: 'LOCALIZAÇÃO', value: 'São Paulo, Brasil — remoto' },
-      { key: 'FOCO',       value: 'Props · FiveM MLO · Ambientes' },
-      { key: 'FERRAMENTAS', value: 'Blender · Substance Painter · UE5' },
-      { key: 'CONTATO',    value: 'artstation.com/zyur', highlight: true },
-      { key: 'STATUS',     value: 'ABERTO_PARA_TRABALHO', highlight: true },
-      { key: 'RESPOSTA',   value: 'até 24h' },
+      { key: 'FOCO',        value: 'Props · FiveM MLO · Ambientes' },
+      { key: 'FERRAMENTAS', value: 'Blender · Substance Painter · CodeWalker · UE5' },
+      { key: 'ARTSTATION',  value: 'artstation.com/zyur', highlight: true },
+      { key: 'STATUS',      value: 'ABERTO_PARA_TRABALHO', highlight: true },
+      { key: 'RESPOSTA',    value: 'até 24h' },
     ],
 
     helpTerminal: [
