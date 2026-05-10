@@ -1,11 +1,10 @@
 // Componente principal do terminal
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useTerminal } from '../../hooks/useTerminal'
 import TerminalOutput from './TerminalOutput'
 import TerminalInput from './TerminalInput'
 import styles from './Terminal.module.css'
 
-// ZYUR — cinza, linha por linha
 const ASCII_ZYUR = [
   "  _______ ___ ___ ___ ___   _______ ",
   " |   _   |   Y   |   Y   | |   _   \\",
@@ -16,7 +15,6 @@ const ASCII_ZYUR = [
   " `-------' `---' `-------` --- ---' ",
 ]
 
-// DEV — vermelho, linha por linha (mesmo número de linhas que ZYUR)
 const ASCII_DEV = [
   "    ______   _______ ___ ___ ",
   "   |   _  \\ |   _   |   Y   |",
@@ -27,7 +25,6 @@ const ASCII_DEV = [
   "   `------' `-------' `---'  ",
 ]
 
-// Digita um texto caractere por caractere
 function typeText(text, onChar, onComplete, speed = 30) {
   let i = 0
   function next() {
@@ -39,17 +36,24 @@ function typeText(text, onChar, onComplete, speed = 30) {
   next()
 }
 
-function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
-  const { lines, processCommand, navigateHistory } = useTerminal({
-    t, onNavigate, onShutdown, onLangChange,
-  })
+// Tipos de boot lines — 'whoami' é reativo, os outros são estáticos
+const BOOT_TYPES = ['whoami', 'status', 'tutorial']
 
-  // Linhas da sequência de boot (separadas das interativas)
-  const [bootLines, setBootLines] = useState([])
-  const [typingCmd, setTypingCmd] = useState(null)
+function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
+  const [bootLines, setBootLines]   = useState([])
+  const [typingCmd, setTypingCmd]   = useState(null)
   const [typingText, setTypingText] = useState('')
-  const bootDone = useRef(false)
+  const bootDone  = useRef(false)
   const scrollRef = useRef(null)
+
+  // Clear — mantém só o whoami (índice 0)
+  const handleClear = useCallback(() => {
+    setBootLines(prev => prev.slice(0, 1))
+  }, [])
+
+  const { lines, processCommand, navigateHistory } = useTerminal({
+    t, onNavigate, onShutdown, onLangChange, onClear: handleClear,
+  })
 
   // Scroll automático
   useEffect(() => {
@@ -58,47 +62,21 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
     }
   }, [bootLines, typingCmd, typingText, lines])
 
-  // Sequência inicial com efeito de digitação
+  // Sequência inicial — roda uma vez, guarda o TIPO não o conteúdo
   useEffect(() => {
     if (bootDone.current) return
     bootDone.current = true
 
     const seq = [
-      {
-        cmd: 'whoami',
-        output: {
-          type: 'output',
-          content: `Props, environments and MLOs for games and FiveM.\n5+ years turning briefs into production-ready assets.`,
-        },
-      },
-      {
-        cmd: 'sys status',
-        output: { type: 'status', content: t.sysStatus },
-      },
-      {
-        cmd: 'cat tutorial.txt',
-        output: {
-          type: 'tutorial',
-          content: [
-            `Welcome to ZYUR DEV portfolio.`,
-            `This is an interactive terminal.`,
-            ``,
-            ` → type commands in the input below`,
-            ` → or click shortcuts in the hint bar above`,
-            ` → opening a section splits the screen in two`,
-            ` → use  cd ..  to close the right panel`,
-            ` → the left terminal is always active`,
-            ``,
-            `TIP: start with  cd work ,  cd about  or  cd contact`,
-          ],
-        },
-      },
+      { cmd: 'whoami',          type: 'whoami'   },
+      { cmd: 'status',          type: 'status'   },
+      { cmd: 'cat tutorial.txt', type: 'tutorial' },
     ]
 
     let delay = 600
 
     seq.forEach((item) => {
-      const cmdDelay = delay
+      const cmdDelay       = delay
       const typingDuration = item.cmd.length * 38
 
       setTimeout(() => {
@@ -111,7 +89,8 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
           () => {
             setTypingCmd(null)
             setTypingText('')
-            setBootLines(prev => [...prev, { cmd: item.cmd, result: item.output }])
+            // Guarda apenas o tipo — o conteúdo vem de `t` na hora de renderizar
+            setBootLines(prev => [...prev, { cmd: item.cmd, type: item.type }])
           },
           38,
         )
@@ -120,6 +99,9 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
       delay += typingDuration + 950
     })
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Hint bar — ordem fixa
+  const hintCmds = ['whoami', 'ls', 'help', 'status', 'clear', 'reboot', 'lang pt', 'lang es', 'lang en']
 
   return (
     <div className={styles.terminal}>
@@ -137,9 +119,9 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
       <div className={styles.hintBar}>
         <div className={styles.hintGroup}>
           <span className={styles.hintLabel}>{t.hintTerminal}</span>
-          {t.helpTerminal.map(item => (
-            <span key={item.cmd} className={styles.hintCmd} onClick={() => processCommand(item.cmd)}>
-              {item.cmd}
+          {hintCmds.map(cmd => (
+            <span key={cmd} className={styles.hintCmd} onClick={() => processCommand(cmd)}>
+              {cmd}
             </span>
           ))}
         </div>
@@ -161,7 +143,7 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
         onClick={() => document.getElementById('zyur-input')?.focus()}
       >
 
-        {/* ASCII art — ZYUR cinza + DEV vermelho lado a lado */}
+        {/* ASCII ZYUR cinza + DEV vermelho */}
         <div className={styles.asciiWrap}>
           <pre className={styles.ascii}>
             {ASCII_ZYUR.map((line, i) => (
@@ -174,9 +156,9 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
           </pre>
         </div>
 
-        {/* Linhas do boot com typewriter */}
+        {/* Boot lines — conteúdo vem de `t` para ser reativo ao idioma */}
         {bootLines.map((line, i) => (
-          <BootLine key={i} line={line} styles={styles} />
+          <BootLine key={i} line={line} t={t} styles={styles} />
         ))}
 
         {/* Comando sendo digitado */}
@@ -188,10 +170,10 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
           </div>
         )}
 
-        {/* Linhas interativas do usuário */}
+        {/* Linhas interativas */}
         <TerminalOutput lines={lines} />
 
-        {/* Input sempre no final */}
+        {/* Input */}
         <TerminalInput
           onCommand={processCommand}
           onHistoryNavigate={navigateHistory}
@@ -202,36 +184,33 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
   )
 }
 
-// Linha de boot individual
-function BootLine({ line, styles: s }) {
-  const r = line.result
-
+// Linha de boot — recebe `t` e resolve o conteúdo na hora de renderizar
+function BootLine({ line, t, styles: s }) {
   return (
     <div className={s.entry}>
       <div className={s.cmdLine}>
         <span className={s.prompt}>$&nbsp;</span>
         <span className={s.cmd}>{line.cmd}</span>
       </div>
-      {r && <BootOutput result={r} styles={s} />}
+      <BootOutput type={line.type} t={t} styles={s} />
     </div>
   )
 }
 
-// Output de cada tipo de linha de boot
-function BootOutput({ result, styles: s }) {
-
-  if (result.type === 'output') {
+// Output reativo — usa `t` no momento do render, não no momento do boot
+function BootOutput({ type, t, styles: s }) {
+  if (type === 'whoami') {
     return (
       <div className={s.block} style={{ whiteSpace: 'pre-line' }}>
-        {result.content}
+        {t.whoami}
       </div>
     )
   }
 
-  if (result.type === 'status') {
+  if (type === 'status') {
     return (
       <div className={s.block}>
-        {result.content.map((row, i) => (
+        {t.sysStatus.map((row, i) => (
           <div key={i} className={s.kvRow}>
             <span className={s.kvKey}>{row.key}</span>
             <span className={row.highlight ? s.kvValHi : s.kvVal}>{row.value}</span>
@@ -241,19 +220,22 @@ function BootOutput({ result, styles: s }) {
     )
   }
 
-  if (result.type === 'tutorial') {
+  if (type === 'tutorial') {
     return (
       <div className={s.block}>
-        {result.content.map((line, i) => (
+        {t.tutorial.map((line, i) => (
           <div key={i} className={
-            i === 0              ? s.tutorialTitle :
-            line.startsWith('TIP:') ? s.tutorialTip  :
-            line.startsWith(' →')  ? s.tutorialItem :
-            line === ''            ? s.tutorialBlank :
+            i === 0                                               ? s.tutorialTitle :
+            line.startsWith('TIP:') || line.startsWith('DICA:') ? s.tutorialTip   :
+            line.startsWith(' →')                                ? s.tutorialItem  :
+            line === ''                                          ? s.tutorialBlank :
             s.tutorialText
           }>
-            {line.startsWith('TIP:') ? (
-              <><span className={s.tutorialTipLabel}>TIP:</span>{line.slice(4)}</>
+            {line.startsWith('TIP:') || line.startsWith('DICA:') ? (
+              <>
+                <span className={s.tutorialTipLabel}>{line.split(':')[0]}:</span>
+                {line.slice(line.indexOf(':') + 1)}
+              </>
             ) : line}
           </div>
         ))}

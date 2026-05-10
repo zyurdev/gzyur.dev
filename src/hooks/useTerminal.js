@@ -1,7 +1,7 @@
 // Lógica do terminal — comandos, histórico e output
 import { useState, useCallback } from 'react'
 
-export function useTerminal({ t, onNavigate, onShutdown, onLangChange }) {
+export function useTerminal({ t, onNavigate, onShutdown, onLangChange, onClear }) {
   const [lines, setLines]     = useState([])
   const [history, setHistory] = useState([])
   const [histIdx, setHistIdx] = useState(-1)
@@ -29,15 +29,19 @@ export function useTerminal({ t, onNavigate, onShutdown, onLangChange }) {
     if (lower === 'lang en') { onLangChange('en'); pushLine(input, { type: 'lang', content: 'Language switched to English.'   }); return }
     if (lower === 'lang es') { onLangChange('es'); pushLine(input, { type: 'lang', content: 'Idioma cambiado a Español.'      }); return }
 
-    // Shutdown
-    if (lower === 'shutdown sys') {
+    // Reboot
+    if (lower === 'reboot') {
       pushLine(input, { type: 'shutdown', content: t.shutdownMsg })
       setTimeout(onShutdown, 1500)
       return
     }
 
-    // Clear
-    if (lower === 'clear') { setLines([]); return }
+    // Clear — limpa interativas + boot, mantém só whoami
+    if (lower === 'clear') {
+      setLines([])
+      onClear()
+      return
+    }
 
     // Whoami
     if (lower === 'whoami') {
@@ -67,8 +71,8 @@ export function useTerminal({ t, onNavigate, onShutdown, onLangChange }) {
       return
     }
 
-    // Sys status
-    if (lower === 'sys status') {
+    // Status
+    if (lower === 'status') {
       pushLine(input, { type: 'status', content: t.sysStatus })
       return
     }
@@ -76,7 +80,7 @@ export function useTerminal({ t, onNavigate, onShutdown, onLangChange }) {
     // Comando não encontrado
     pushLine(input, { type: 'error', content: t.cmdNotFound(input) })
 
-  }, [t, onNavigate, onShutdown, onLangChange])
+  }, [t, onNavigate, onShutdown, onLangChange, onClear])
 
   function navigateHistory(direction, currentValue, setInputValue) {
     if (direction === 'up') {

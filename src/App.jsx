@@ -51,9 +51,11 @@ function App() {
             onNavigate={setPage}
           />
 
+          {/* Passa t para o popup para textos traduzíveis */}
           <ProjectPopup
             projectIndex={openProject}
             onClose={() => setOpenProject(null)}
+            t={t}
           />
         </>
       )}

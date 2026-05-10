@@ -20,7 +20,7 @@ const translations = {
     hintPages:    'pages:',
 
     // Nav bar
-    navPrompt: 'root@3d/nav > SELECT MODULE',
+    navPrompt:  'root@3d/nav > SELECT MODULE',
     navHome:    '01._HOME',
     navWork:    '02._WORK',
     navAbout:   '03._ABOUT',
@@ -40,26 +40,42 @@ const translations = {
     // Terminal — whoami
     whoami: `3D Artist — props, environments and MLOs for games and FiveM.\n5+ years turning briefs into production-ready assets.`,
 
-    // Terminal — sys status
+    // Terminal — status
     sysStatus: [
-      { key: 'IDENTITY', value: 'ZYUR — 3D Artist' },
-      { key: 'LOCATION', value: 'São Paulo, Brazil — remote' },
-      { key: 'FOCUS',    value: 'Props · FiveM MLO · Environments' },
-      { key: 'TOOLS',    value: 'Blender · Substance Painter · CodeWalker · UE5' },
+      { key: 'IDENTITY',   value: 'ZYUR — 3D Artist' },
+      { key: 'LOCATION',   value: 'São Paulo, Brazil — remote' },
+      { key: 'FOCUS',      value: 'Props · FiveM MLO · Environments' },
+      { key: 'TOOLS',      value: 'Blender · Substance Painter · CodeWalker · UE5' },
       { key: 'ARTSTATION', value: 'artstation.com/zyur', highlight: true },
-      { key: 'STATUS',   value: 'OPEN_TO_WORK', highlight: true },
-      { key: 'RESPONSE', value: 'within 24h' },
+      { key: 'STATUS',     value: 'OPEN_TO_WORK', highlight: true },
+      { key: 'RESPONSE',   value: 'within 24h' },
+    ],
+
+    // Terminal — tutorial
+    tutorial: [
+      `Welcome to ZYUR DEV portfolio.`,
+      `This is an interactive terminal.`,
+      ``,
+      ` → type commands in the input below`,
+      ` → or click shortcuts in the hint bar above`,
+      ` → opening a section splits the screen in two`,
+      ` → use  cd ..  to close the right panel`,
+      ` → the left terminal is always active`,
+      ``,
+      `TIP: start with  cd work ,  cd about  or  cd contact`,
     ],
 
     // Terminal — help
     helpTerminal: [
-      { cmd: 'whoami',       desc: 'show identity' },
-      { cmd: 'ls',           desc: 'list projects' },
-      { cmd: 'sys status',   desc: 'system status' },
-      { cmd: 'clear',        desc: 'clear terminal' },
-      { cmd: 'shutdown sys', desc: 'restart system' },
-      { cmd: 'lang pt',      desc: 'switch to Portuguese' },
-      { cmd: 'lang es',      desc: 'switch to Spanish' },
+      { cmd: 'whoami',  desc: 'show identity' },
+      { cmd: 'ls',      desc: 'list projects' },
+      { cmd: 'help',    desc: 'show commands' },
+      { cmd: 'status',  desc: 'system status' },
+      { cmd: 'clear',   desc: 'clear terminal' },
+      { cmd: 'reboot',  desc: 'restart system' },
+      { cmd: 'lang pt', desc: 'português' },
+      { cmd: 'lang es', desc: 'español' },
+      { cmd: 'lang en', desc: 'english' },
     ],
     helpPages: [
       { cmd: 'cd work',    desc: 'open projects section' },
@@ -68,29 +84,46 @@ const translations = {
       { cmd: 'cd ..',      desc: 'close panel / go back' },
     ],
 
-    // Terminal — erros e shutdown
+    // Erros e reboot
     cmdNotFound: (cmd) => `bash: ${cmd}: command not found — type help`,
     shutdownMsg: [
-      'Starting shutdown sequence...',
+      'Starting reboot sequence...',
       'Saving system state...',
       'Unmounting 3D modules...',
     ],
 
+    // Projetos traduzíveis
+    projects: [
+      {
+        name:  'Nyx — Private Discord Bot',
+        brief: 'Private Discord bot with custom command systems and automations.',
+        desc:  'Nyx is a private bot built with Discord.js v14. Designed for modularity and performance — each feature isolated in independent modules for easy expansion and maintenance.',
+        details: {
+          Stack:      'Discord.js v14 · Node.js',
+          Type:       'Private Bot',
+          Language:   'JavaScript',
+          Repository: 'github.com/zyurdev/nyx-bot',
+          Status:     'In development',
+        },
+      },
+    ],
+    comingSoon: 'new projects coming soon...',
+
     // About panel
-    aboutBio: `3D Artist focused on assets that work — not just pretty renders.\nEvery project starts with a brief and ends with an optimized, documented deliverable ready for production.\n5+ years in games, FiveM and environments. Available for remote projects globally.`,
-    aboutClass:   'MODEL_3D',
-    aboutXp:      'SENIOR',
-    aboutBase:    'BR / Remote',
-    aboutLang:    'PT / EN / ES',
-    aboutAlert:   'OPEN TO WORK',
+    aboutBio:       `3D Artist focused on assets that work — not just pretty renders.\nEvery project starts with a brief and ends with an optimized, documented deliverable ready for production.\n5+ years in games, FiveM and environments. Available for remote projects globally.`,
+    aboutClass:     'MODEL_3D',
+    aboutXp:        'SENIOR',
+    aboutBase:      'BR / Remote',
+    aboutLang:      'PT / EN / ES',
+    aboutAlert:     'OPEN TO WORK',
     aboutContracts: 'CONTRACTS: ON',
-    aboutRemote:  '[REMOTE_READY]',
+    aboutRemote:    '[REMOTE_READY]',
 
     // Contact panel
-    contactTitle: 'LETS\nCREATE.',
-    contactSub:   '// quote within 24h — no commitment',
-    contactName:  'Your name',
-    contactEmail: 'your@email.com',
+    contactTitle:   'LETS\nCREATE.',
+    contactSub:     '// quote within 24h — no commitment',
+    contactName:    'Your name',
+    contactEmail:   'your@email.com',
     contactProject: 'Project type',
     contactBudget:  'Budget',
     contactDesc:    'Describe your project...',
@@ -98,7 +131,6 @@ const translations = {
     contactOptions: ['Select...', 'Games / Props', 'FiveM / MLO', 'Environment', 'Character', 'Other'],
     contactBudgets: ['Select...', '$ 100–300', '$ 300–800', '$ 800+'],
 
-    // Right panel close
     closePanel: 'cd .. ×',
   },
 
@@ -117,7 +149,7 @@ const translations = {
     hintTerminal: 'terminal:',
     hintPages:    'páginas:',
 
-    navPrompt: 'root@3d/nav > SELECIONAR MÓDULO',
+    navPrompt:  'root@3d/nav > SELECIONAR MÓDULO',
     navHome:    '01._INÍCIO',
     navWork:    '02._TRABALHOS',
     navAbout:   '03._SOBRE',
@@ -145,14 +177,29 @@ const translations = {
       { key: 'RESPOSTA',    value: 'até 24h' },
     ],
 
+    tutorial: [
+      `Bem-vindo ao portfólio ZYUR DEV.`,
+      `Este é um terminal interativo.`,
+      ``,
+      ` → digite comandos na linha abaixo`,
+      ` → ou clique nos atalhos da barra acima`,
+      ` → abrir uma seção divide a tela em dois`,
+      ` → use  cd ..  para fechar o painel direito`,
+      ` → o terminal esquerdo fica sempre ativo`,
+      ``,
+      `DICA: comece com  cd work ,  cd about  ou  cd contact`,
+    ],
+
     helpTerminal: [
-      { cmd: 'whoami',       desc: 'exibe identidade' },
-      { cmd: 'ls',           desc: 'lista projetos' },
-      { cmd: 'sys status',   desc: 'status do sistema' },
-      { cmd: 'clear',        desc: 'limpa o terminal' },
-      { cmd: 'shutdown sys', desc: 'reinicia o sistema' },
-      { cmd: 'lang en',      desc: 'trocar para inglês' },
-      { cmd: 'lang es',      desc: 'trocar para espanhol' },
+      { cmd: 'whoami',  desc: 'exibe identidade' },
+      { cmd: 'ls',      desc: 'lista projetos' },
+      { cmd: 'help',    desc: 'mostra comandos' },
+      { cmd: 'status',  desc: 'status do sistema' },
+      { cmd: 'clear',   desc: 'limpa o terminal' },
+      { cmd: 'reboot',  desc: 'reinicia o sistema' },
+      { cmd: 'lang pt', desc: 'português' },
+      { cmd: 'lang es', desc: 'español' },
+      { cmd: 'lang en', desc: 'english' },
     ],
     helpPages: [
       { cmd: 'cd work',    desc: 'abre seção de projetos' },
@@ -163,24 +210,40 @@ const translations = {
 
     cmdNotFound: (cmd) => `bash: ${cmd}: comando não encontrado — digite help`,
     shutdownMsg: [
-      'Iniciando sequência de shutdown...',
+      'Iniciando sequência de reboot...',
       'Salvando estado do sistema...',
       'Desmontando módulos 3D...',
     ],
 
-    aboutBio: `Modelador 3D com foco em assets que funcionam — não só renders bonitos.\nCada projeto começa com um brief e termina com um deliverable otimizado, documentado e pronto para produção.\n5+ anos em games, FiveM e ambientes. Disponível para projetos remotos globalmente.`,
-    aboutClass:   'MODEL_3D',
-    aboutXp:      'SENIOR',
-    aboutBase:    'BR / Remoto',
-    aboutLang:    'PT / EN / ES',
-    aboutAlert:   'ABERTO PARA TRABALHO',
-    aboutContracts: 'CONTRATOS: ATIVOS',
-    aboutRemote:  '[REMOTO_DISPONÍVEL]',
+    projects: [
+      {
+        name:  'Nyx — Bot Privado para Discord',
+        brief: 'Bot privado para Discord com sistema de comandos e automações customizadas.',
+        desc:  'Nyx é um bot privado desenvolvido em Discord.js v14. Construído com foco em modularidade e performance — cada funcionalidade isolada em módulos independentes para facilitar expansão e manutenção.',
+        details: {
+          Stack:       'Discord.js v14 · Node.js',
+          Tipo:        'Bot Privado',
+          Linguagem:   'JavaScript',
+          Repositório: 'github.com/zyurdev/nyx-bot',
+          Status:      'Em desenvolvimento',
+        },
+      },
+    ],
+    comingSoon: 'novos trabalhos em breve...',
 
-    contactTitle: 'VAMOS\nCRIAR.',
-    contactSub:   '// orçamento em até 24h — sem compromisso',
-    contactName:  'Seu nome',
-    contactEmail: 'seu@email.com',
+    aboutBio:       `Modelador 3D com foco em assets que funcionam — não só renders bonitos.\nCada projeto começa com um brief e termina com um deliverable otimizado, documentado e pronto para produção.\n5+ anos em games, FiveM e ambientes. Disponível para projetos remotos globalmente.`,
+    aboutClass:     'MODEL_3D',
+    aboutXp:        'SENIOR',
+    aboutBase:      'BR / Remoto',
+    aboutLang:      'PT / EN / ES',
+    aboutAlert:     'ABERTO PARA TRABALHO',
+    aboutContracts: 'CONTRATOS: ATIVOS',
+    aboutRemote:    '[REMOTO_DISPONÍVEL]',
+
+    contactTitle:   'VAMOS\nCRIAR.',
+    contactSub:     '// orçamento em até 24h — sem compromisso',
+    contactName:    'Seu nome',
+    contactEmail:   'seu@email.com',
     contactProject: 'Tipo de projeto',
     contactBudget:  'Orçamento',
     contactDesc:    'Descreva seu projeto...',
@@ -206,7 +269,7 @@ const translations = {
     hintTerminal: 'terminal:',
     hintPages:    'páginas:',
 
-    navPrompt: 'root@3d/nav > SELECCIONAR MÓDULO',
+    navPrompt:  'root@3d/nav > SELECCIONAR MÓDULO',
     navHome:    '01._INICIO',
     navWork:    '02._TRABAJOS',
     navAbout:   '03._SOBRE',
@@ -222,7 +285,7 @@ const translations = {
       'Sistema en línea...',
     ],
 
-    whoami: `Artista 3D — props, escenarios y MLOs para games y FiveM.\n5+ años convirtiendo briefs en assets que funcionan en pipelines reales.`,
+    whoami: `Artista 3D — props, escenarios y MLOs para games y FiveM.\n5+ años convirtiendo briefs en assets listos para producción.`,
 
     sysStatus: [
       { key: 'IDENTIDAD',  value: 'ZYUR — Artista 3D' },
@@ -234,14 +297,29 @@ const translations = {
       { key: 'RESPUESTA',  value: 'en 24h' },
     ],
 
+    tutorial: [
+      `Bienvenido al portfolio ZYUR DEV.`,
+      `Este es un terminal interactivo.`,
+      ``,
+      ` → escribe comandos en la línea de abajo`,
+      ` → o haz clic en los atajos de la barra de arriba`,
+      ` → abrir una sección divide la pantalla en dos`,
+      ` → usa  cd ..  para cerrar el panel derecho`,
+      ` → el terminal izquierdo siempre permanece activo`,
+      ``,
+      `TIP: empieza con  cd work ,  cd about  o  cd contact`,
+    ],
+
     helpTerminal: [
-      { cmd: 'whoami',       desc: 'mostrar identidad' },
-      { cmd: 'ls',           desc: 'listar proyectos' },
-      { cmd: 'sys status',   desc: 'estado del sistema' },
-      { cmd: 'clear',        desc: 'limpiar terminal' },
-      { cmd: 'shutdown sys', desc: 'reiniciar sistema' },
-      { cmd: 'lang en',      desc: 'cambiar a inglés' },
-      { cmd: 'lang pt',      desc: 'cambiar a portugués' },
+      { cmd: 'whoami',  desc: 'mostrar identidad' },
+      { cmd: 'ls',      desc: 'listar proyectos' },
+      { cmd: 'help',    desc: 'mostrar comandos' },
+      { cmd: 'status',  desc: 'estado del sistema' },
+      { cmd: 'clear',   desc: 'limpiar terminal' },
+      { cmd: 'reboot',  desc: 'reiniciar sistema' },
+      { cmd: 'lang pt', desc: 'português' },
+      { cmd: 'lang es', desc: 'español' },
+      { cmd: 'lang en', desc: 'english' },
     ],
     helpPages: [
       { cmd: 'cd work',    desc: 'abrir sección proyectos' },
@@ -252,24 +330,40 @@ const translations = {
 
     cmdNotFound: (cmd) => `bash: ${cmd}: comando no encontrado — escribe help`,
     shutdownMsg: [
-      'Iniciando secuencia de apagado...',
+      'Iniciando secuencia de reinicio...',
       'Guardando estado del sistema...',
       'Desmontando módulos 3D...',
     ],
 
-    aboutBio: `Artista 3D enfocado en assets que funcionan — no solo renders bonitos.\nCada proyecto comienza con un brief y termina con un entregable optimizado, documentado y listo para producción.\n5+ años en games, FiveM y entornos. Disponible para proyectos remotos globalmente.`,
-    aboutClass:   'MODEL_3D',
-    aboutXp:      'SENIOR',
-    aboutBase:    'BR / Remoto',
-    aboutLang:    'PT / EN / ES',
-    aboutAlert:   'ABIERTO A TRABAJO',
-    aboutContracts: 'CONTRATOS: ACTIVOS',
-    aboutRemote:  '[REMOTO_DISPONIBLE]',
+    projects: [
+      {
+        name:  'Nyx — Bot Privado para Discord',
+        brief: 'Bot privado para Discord con sistema de comandos y automatizaciones personalizadas.',
+        desc:  'Nyx es un bot privado desarrollado en Discord.js v14. Construido con foco en modularidad y rendimiento — cada funcionalidad aislada en módulos independientes para facilitar expansión y mantenimiento.',
+        details: {
+          Stack:       'Discord.js v14 · Node.js',
+          Tipo:        'Bot Privado',
+          Lenguaje:    'JavaScript',
+          Repositorio: 'github.com/zyurdev/nyx-bot',
+          Status:      'En desarrollo',
+        },
+      },
+    ],
+    comingSoon: 'nuevos proyectos próximamente...',
 
-    contactTitle: 'VAMOS A\nCREAR.',
-    contactSub:   '// presupuesto en 24h — sin compromiso',
-    contactName:  'Tu nombre',
-    contactEmail: 'tu@email.com',
+    aboutBio:       `Artista 3D enfocado en assets que funcionan — no solo renders bonitos.\nCada proyecto comienza con un brief y termina con un entregable optimizado, documentado y listo para producción.\n5+ años en games, FiveM y entornos. Disponible para proyectos remotos globalmente.`,
+    aboutClass:     'MODEL_3D',
+    aboutXp:        'SENIOR',
+    aboutBase:      'BR / Remoto',
+    aboutLang:      'PT / EN / ES',
+    aboutAlert:     'ABIERTO A TRABAJO',
+    aboutContracts: 'CONTRATOS: ACTIVOS',
+    aboutRemote:    '[REMOTO_DISPONIBLE]',
+
+    contactTitle:   'VAMOS A\nCREAR.',
+    contactSub:     '// presupuesto en 24h — sin compromiso',
+    contactName:    'Tu nombre',
+    contactEmail:   'tu@email.com',
     contactProject: 'Tipo de proyecto',
     contactBudget:  'Presupuesto',
     contactDesc:    'Describe tu proyecto...',

@@ -424,3 +424,29 @@
 .contactLink::before { content: '↗'; color: var(--fg3); transition: color 0.12s; }
 .contactLink:hover   { color: var(--fg); }
 .contactLink:hover::before { color: var(--red); }
+
+/* Mensagem de em breve */
+.comingSoon {
+  padding: 16px 18px;
+  font-size: 10px;
+  color: var(--fg3);
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--fg4);
+}
+
+.comingSoonDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  animation: recBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes recBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.15; }
+}
