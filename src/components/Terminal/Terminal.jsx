@@ -36,9 +36,6 @@ function typeText(text, onChar, onComplete, speed = 30) {
   next()
 }
 
-// Tipos de boot lines — 'whoami' é reativo, os outros são estáticos
-const BOOT_TYPES = ['whoami', 'status', 'tutorial']
-
 function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
   const [bootLines, setBootLines]   = useState([])
   const [typingCmd, setTypingCmd]   = useState(null)
@@ -98,7 +95,7 @@ function Terminal({ t, onNavigate, onShutdown, onLangChange }) {
 
       delay += typingDuration + 950
     })
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [])
 
   // Hint bar — ordem fixa
   const hintCmds = ['whoami', 'ls', 'help', 'status', 'clear', 'reboot', 'lang pt', 'lang es', 'lang en']
